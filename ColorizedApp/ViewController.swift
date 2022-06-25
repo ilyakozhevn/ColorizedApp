@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
 //    MARK: initialisation of variables
+    
     @IBOutlet var colorScreenView: UIView!
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
@@ -19,11 +20,15 @@ class ViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+//    MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         colorScreenView.layer.cornerRadius = 15
         colorScreenAdjustment()
         }
+    
+//    MARK: sliders change functions
     
     @IBAction func redSliderChange() {
         textChange(of: redValueLabel, to: redSlider.value)
@@ -40,6 +45,7 @@ class ViewController: UIViewController {
     }
     
 //   MARK: private functions
+    
     private func getCGFloat(from label: UILabel) -> CGFloat {
         CGFloat(Float(label.text ?? "0") ?? 0)
     }
@@ -55,7 +61,10 @@ class ViewController: UIViewController {
     }
     
     private func textChange(of label: UILabel, to value: Float) {
-        label.text = String( (value * 100).rounded() / 100)
+        label.text = String(
+            format: "%.2f",
+            (value * 100).rounded() / 100
+        )
     }
 }
 
