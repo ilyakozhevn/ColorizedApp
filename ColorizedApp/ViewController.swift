@@ -46,25 +46,18 @@ class ViewController: UIViewController {
     
 //   MARK: private functions
     
-    private func getCGFloat(from label: UILabel) -> CGFloat {
-        CGFloat(Float(label.text ?? "0") ?? 0)
-    }
-
     private func colorScreenAdjustment() {
 
         colorScreenView.backgroundColor = UIColor(
-            red: getCGFloat(from: redValueLabel),
-            green: getCGFloat(from: greenValueLabel),
-            blue: getCGFloat(from: blueValueLabel),
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
             alpha: CGFloat(1)
         )
     }
     
     private func textChange(of label: UILabel, to value: Float) {
-        label.text = String(
-            format: "%.2f",
-            (value * 100).rounded() / 100
-        )
+        label.text = String(format: "%.2f", value)
     }
 }
 
