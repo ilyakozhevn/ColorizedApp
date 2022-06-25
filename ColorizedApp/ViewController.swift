@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 //    MARK: initialisation of variables
     
     @IBOutlet var colorScreenView: UIView!
+    
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
