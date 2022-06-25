@@ -22,6 +22,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zkq-Md-9Bm" userLabel="Color Screen View">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="253.33333333333334"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" red="0.52120376476024743" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="EA1-l4-5yh" userLabel="Colors Adjustments Stack View">
                                         <rect key="frame" x="0.0" y="293.33333333333331" width="350" height="104"/>
@@ -32,7 +33,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-5U-HDv">
                                                         <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="55" id="lOa-HL-lbV"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="lOa-HL-lbV"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -41,7 +42,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAB-ga-0h0" userLabel="RedValueLabel">
                                                         <rect key="frame" x="60" y="0.0" width="35" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="35" id="4K6-wi-Zs4"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="4K6-wi-Zs4"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
@@ -62,7 +63,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTW-go-qSz">
                                                         <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="55" id="pLv-Ls-CZU"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="pLv-Ls-CZU"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -71,7 +72,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTV-SW-jFL" userLabel="GreenValueLabel">
                                                         <rect key="frame" x="60" y="0.0" width="35" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="35" id="ybe-8f-C2O"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="ybe-8f-C2O"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
@@ -92,7 +93,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Mh-19-TpJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="55" id="WsC-RI-ilz"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="WsC-RI-ilz"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -101,7 +102,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cq9-iN-p6Y" userLabel="BlueValueLabel">
                                                         <rect key="frame" x="60" y="0.0" width="35" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="35" id="PWP-5m-8gH"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="PWP-5m-8gH"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
