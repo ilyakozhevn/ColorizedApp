@@ -31,17 +31,17 @@ class ViewController: UIViewController {
     
 //    MARK: sliders change functions
     
-    @IBAction func redSliderChange() {
-        textChange(of: redValueLabel, to: redSlider.value)
-        colorScreenAdjustment()
-    }
-    
-    @IBAction func greenSliderChange() {
-        textChange(of: greenValueLabel, to: greenSlider.value)
-        colorScreenAdjustment()
-    }
-    @IBAction func blueSliderChange() {
-        textChange(of: blueValueLabel, to: blueSlider.value)
+    @IBAction func sliderChange(slider: UISlider) {
+        
+        switch slider {
+        case redSlider:
+            updateText(on: redValueLabel, with: slider.value)
+        case greenSlider:
+            updateText(on: greenValueLabel, with: slider.value)
+        default:
+            updateText(on: blueValueLabel, with: slider.value)
+        }
+        
         colorScreenAdjustment()
     }
     
@@ -74,12 +74,12 @@ class ViewController: UIViewController {
         greenSlider.value = green
         blueSlider.value = blue
         
-        textChange(of: redValueLabel, to: red)
-        textChange(of: greenValueLabel, to: green)
-        textChange(of: blueValueLabel, to: blue)
+        updateText(on: redValueLabel, with: red)
+        updateText(on: greenValueLabel, with: green)
+        updateText(on: blueValueLabel, with: blue)
     }
     
-    private func textChange(of label: UILabel, to value: Float) {
+    private func updateText(on label: UILabel, with value: Float) {
         label.text = String(format: "%.2f", value)
     }
     

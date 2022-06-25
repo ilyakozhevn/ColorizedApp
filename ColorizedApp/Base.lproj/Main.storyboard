@@ -52,7 +52,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="254" height="31"/>
                                                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <connections>
-                                                            <action selector="redSliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="96B-CH-JYl"/>
+                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="2n8-FM-Hhw"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
@@ -82,7 +82,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="254" height="31"/>
                                                         <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
-                                                            <action selector="greenSliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="inv-au-6a6"/>
+                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="xcQ-mV-DsB"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
@@ -112,7 +112,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="254" height="31"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
-                                                            <action selector="blueSliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="sd8-eB-fXc"/>
+                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ygm-hg-RZu"/>
                                                         </connections>
                                                     </slider>
                                                 </subviews>
