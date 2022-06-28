@@ -35,11 +35,11 @@ class ViewController: UIViewController {
         
         switch slider {
         case redSlider:
-            updateText(on: redValueLabel, with: slider.value)
+            updateText(on: redValueLabel)
         case greenSlider:
-            updateText(on: greenValueLabel, with: slider.value)
+            updateText(on: greenValueLabel)
         default:
-            updateText(on: blueValueLabel, with: slider.value)
+            updateText(on: blueValueLabel)
         }
         
         colorScreenAdjustment()
@@ -74,13 +74,24 @@ class ViewController: UIViewController {
         greenSlider.value = green
         blueSlider.value = blue
         
-        updateText(on: redValueLabel, with: red)
-        updateText(on: greenValueLabel, with: green)
-        updateText(on: blueValueLabel, with: blue)
+        updateText(on: redValueLabel, greenValueLabel, blueValueLabel)
     }
     
-    private func updateText(on label: UILabel, with value: Float) {
-        label.text = String(format: "%.2f", value)
+    private func updateText(on labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel:
+                label.text = stringFrom(redSlider)
+            case greenValueLabel:
+                label.text = stringFrom(greenSlider)
+            default:
+                label.text = stringFrom(blueSlider)
+            }
+        }
+    }
+    
+    private func stringFrom(_ slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
     
     private func colorScreenAdjustment() {
