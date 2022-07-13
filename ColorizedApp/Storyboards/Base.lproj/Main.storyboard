@@ -93,7 +93,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="199" height="35"/>
                                                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <connections>
-                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="2n8-FM-Hhw"/>
+                                                            <action selector="sliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="e0f-s8-jaI"/>
                                                         </connections>
                                                     </slider>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.50" borderStyle="roundedRect" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ldr-xE-TUg" userLabel="RedTF">
@@ -131,7 +131,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="199" height="35"/>
                                                         <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
-                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="xcQ-mV-DsB"/>
+                                                            <action selector="sliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="dha-Y9-NeC"/>
                                                         </connections>
                                                     </slider>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.50" borderStyle="roundedRect" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-oF-Qpe" userLabel="GreenTF">
@@ -169,7 +169,7 @@
                                                         <rect key="frame" x="98" y="0.0" width="199" height="35"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
-                                                            <action selector="sliderChangeWithSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ygm-hg-RZu"/>
+                                                            <action selector="sliderChange" destination="BYZ-38-t0r" eventType="valueChanged" id="zfu-fc-vE5"/>
                                                         </connections>
                                                     </slider>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.50" borderStyle="roundedRect" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="E3i-so-QG7" userLabel="BlueTF">
