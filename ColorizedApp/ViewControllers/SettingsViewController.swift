@@ -41,17 +41,7 @@ class SettingsViewController: UIViewController {
     
 //    MARK: sliders change functions
     
-    @IBAction func sliderChange(slider: UISlider) {
-        
-        switch slider {
-        case redSlider:
-            updateTF(on: redTextField)
-        case greenSlider:
-            updateTF(on: greenTextField)
-        default:
-            updateTF(on: blueTextField)
-        }
-        
+    @IBAction func sliderChange() {
         viewColorUpdate()
     }
     
@@ -77,9 +67,7 @@ class SettingsViewController: UIViewController {
         redSlider.value = getComponentValue(.red, from: viewColor)
         greenSlider.value = getComponentValue(.green, from: viewColor)
         blueSlider.value = getComponentValue(.blue, from: viewColor)
-        
-        updateTF(on: redTextField, greenTextField, blueTextField)
-        
+                
         viewColorUpdate()
     }
     
@@ -135,6 +123,7 @@ class SettingsViewController: UIViewController {
         
         colorScreenView.backgroundColor = viewColor
         
+        updateTF(on: redTextField, greenTextField, blueTextField)
         labelTextUpdate(on: redValueLabel, greenValueLabel, blueValueLabel)
     }
 }
@@ -143,7 +132,13 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let textFieldValue = Float(textField.text!) else { return }
+        guard var textFieldValue = Float(textField.text!) else { return }
+        
+        if textFieldValue > 1 {
+            textFieldValue = 1
+        } else if textFieldValue < 0 {
+            textFieldValue = 0
+        }
         
         switch textField {
         case redTextField:
