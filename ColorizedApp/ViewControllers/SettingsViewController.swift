@@ -21,6 +21,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+    @IBOutlet var redTextField: UITextField!
+    @IBOutlet var greenTextField: UITextField!
+    @IBOutlet var blueTextField: UITextField!
+    
     var viewColor: UIColor!
     var delegate: SettingsViewControllerDelegate!
     
@@ -28,10 +32,11 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorScreenView.layer.cornerRadius = 15
-        colorScreenView.backgroundColor = viewColor
+        delegateTF()
         
-        getRGBColor()
+        colorScreenView.layer.cornerRadius = 15
+        
+        getInitialColorPositions()
     }
     
 //    MARK: sliders change functions
@@ -40,14 +45,14 @@ class SettingsViewController: UIViewController {
         
         switch slider {
         case redSlider:
-            updateText(on: redValueLabel)
+            updateTF(on: redTextField)
         case greenSlider:
-            updateText(on: greenValueLabel)
+            updateTF(on: greenTextField)
         default:
-            updateText(on: blueValueLabel)
+            updateTF(on: blueTextField)
         }
         
-        colorScreenAdjustment()
+        viewColorUpdate()
     }
     
 //   MARK: save button action
@@ -58,65 +63,140 @@ class SettingsViewController: UIViewController {
         dismiss(animated: true)
     }
     
-//   MARK: private functions
+//   MARK: delegate initialisation for TextFields
     
-    private func getRGBColor() {
+    private func delegateTF() {
+        redTextField.delegate = self
+        greenTextField.delegate = self
+        blueTextField.delegate = self
+    }
+    
+//   MARK: get Initial Position for Sliders, TextFields, Labels
+
+    private func getInitialColorPositions() {
+        redSlider.value = getComponentValue(.red, from: viewColor)
+        greenSlider.value = getComponentValue(.green, from: viewColor)
+        blueSlider.value = getComponentValue(.blue, from: viewColor)
+        
+        updateTF(on: redTextField, greenTextField, blueTextField)
+        
+        viewColorUpdate()
+    }
+    
+//   MARK: Text update on Labels
+    
+    private func labelTextUpdate(on labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+                
+            case redValueLabel:
+                label.text = redTextField.text
+            case greenValueLabel:
+                label.text = greenTextField.text
+            default:
+                label.text = blueTextField.text
+            }
+        }
+    }
+    
+//   MARK: Text update on TextFields
+    
+    private func updateTF(on textFields: UITextField...) {
+        textFields.forEach { textField in
+            switch textField {
+                
+            case redTextField:
+                textField.text = String(
+                    format: "%.2f",
+                    getComponentValue(.red, from: viewColor)
+                )
+            case greenTextField:
+                textField.text = String(
+                    format: "%.2f",
+                    getComponentValue(.green, from: viewColor))
+            default:
+                textField.text = String(
+                    format: "%.2f",
+                    getComponentValue(.blue, from: viewColor))
+            }
+        }
+    }
+    
+//   MARK: ViewColor update
+
+    private func viewColorUpdate() {
+
+        viewColor = UIColor(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: CGFloat(1)
+        )
+        
+        colorScreenView.backgroundColor = viewColor
+        
+        labelTextUpdate(on: redValueLabel, greenValueLabel, blueValueLabel)
+    }
+}
+
+//   MARK: Extension UITextFieldDelegate
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let textFieldValue = Float(textField.text!) else { return }
+        
+        switch textField {
+        case redTextField:
+            redSlider.value = textFieldValue
+        case greenTextField:
+            greenSlider.value = textFieldValue
+        default:
+            blueSlider.value = textFieldValue
+        }
+        
+        viewColorUpdate()
+    }
+}
+
+//   MARK: Extension color decomposition to Red, Green, Blue
+
+extension SettingsViewController {
+    enum ColorComponent {
+        case red
+        case green
+        case blue
+    }
+    
+    private func getComponentValue(_ component: ColorComponent, from color: UIColor) -> Float {
         
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         
-        
-        viewColor.getRed(
+        color.getRed(
             &red,
             green: &green,
             blue: &blue,
             alpha: &alpha
         )
         
-        initialSlidersPosition(
-            red: Float(red),
-            green: Float(green),
-            blue: Float(blue)
-        )
-
-    }
-    
-    private func initialSlidersPosition(red: Float, green: Float, blue: Float) {
-        redSlider.value = red
-        greenSlider.value = green
-        blueSlider.value = blue
-        
-        updateText(on: redValueLabel, greenValueLabel, blueValueLabel)
-    }
-    
-    private func updateText(on labels: UILabel...) {
-        labels.forEach { label in
-            switch label {
-            case redValueLabel:
-                label.text = stringFrom(redSlider)
-            case greenValueLabel:
-                label.text = stringFrom(greenSlider)
-            default:
-                label.text = stringFrom(blueSlider)
-            }
+        switch component {
+        case .red:
+            return Float(red)
+        case .green:
+            return Float(green)
+        case .blue:
+            return Float(blue)
         }
-    }
-    
-    private func stringFrom(_ slider: UISlider) -> String {
-        String(format: "%.2f", slider.value)
-    }
-    
-    private func colorScreenAdjustment() {
-
-        colorScreenView.backgroundColor = UIColor(
-            red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: CGFloat(1)
-        )
-
     }
 }
 
+
+//    MARK: Extension keyboard hide
+extension SettingsViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+}
