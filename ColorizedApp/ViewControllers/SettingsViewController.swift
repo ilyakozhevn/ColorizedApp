@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
 //    MARK: initialisation of variables
     
@@ -21,11 +21,14 @@ class ViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+    var color: UIColor!
+    
 //    MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         colorScreenView.layer.cornerRadius = 15
+        colorScreenView.backgroundColor = color
         getInitialColor()
     }
     
