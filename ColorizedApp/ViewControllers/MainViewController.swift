@@ -7,21 +7,27 @@
 
 import UIKit
 
-//protocol SettingsViewControllerDelegate
+protocol SettingsViewControllerDelegate {
+    func updateBackgroundColor(with color: UIColor)
+}
 
 class MainViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let settingVC = segue.destination as? SettingsViewController else { return }
-        settingVC.color = self.view.backgroundColor
+        settingVC.viewColor = view.backgroundColor
+        settingVC.delegate = self
     }
 
     @IBAction func settingsButtonTouched(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "showSettings", sender: nil)
     }
 
+}
+
+// MARK: SettingsViewControllerDelegate
+extension MainViewController: SettingsViewControllerDelegate {
+    func updateBackgroundColor(with color: UIColor) {
+        view.backgroundColor = color
+    }
 }

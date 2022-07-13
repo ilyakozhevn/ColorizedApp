@@ -162,11 +162,22 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWr-Ms-VXR">
+                                <rect key="frame" x="169.66666666666666" y="491.33333333333331" width="51" height="40.999999999999943"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTouched" destination="BYZ-38-t0r" eventType="touchUpInside" id="HUl-cY-PSu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                         <constraints>
+                            <constraint firstItem="tWr-Ms-VXR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="EWE-NM-byn"/>
                             <constraint firstItem="YUk-oO-eKe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Iwc-BZ-Ipt"/>
+                            <constraint firstItem="tWr-Ms-VXR" firstAttribute="top" secondItem="YUk-oO-eKe" secondAttribute="bottom" constant="30" id="K7h-Tm-7Mw"/>
                             <constraint firstItem="YUk-oO-eKe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="N7r-sV-cGq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YUk-oO-eKe" secondAttribute="trailing" constant="20" id="b0p-e7-6fW"/>
                             <constraint firstItem="Zkq-Md-9Bm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="qjJ-EW-UjG"/>

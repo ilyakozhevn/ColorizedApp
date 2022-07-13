@@ -21,15 +21,17 @@ class SettingsViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
-    var color: UIColor!
+    var viewColor: UIColor!
+    var delegate: SettingsViewControllerDelegate!
     
 //    MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         colorScreenView.layer.cornerRadius = 15
-        colorScreenView.backgroundColor = color
-        getInitialColor()
+        colorScreenView.backgroundColor = viewColor
+        
+        getRGBColor()
     }
     
 //    MARK: sliders change functions
@@ -48,16 +50,25 @@ class SettingsViewController: UIViewController {
         colorScreenAdjustment()
     }
     
+//   MARK: save button action
+    
+    @IBAction func saveButtonTouched() {
+        viewColor = colorScreenView.backgroundColor
+        delegate.updateBackgroundColor(with: viewColor)
+        dismiss(animated: true)
+    }
+    
 //   MARK: private functions
     
-    private func getInitialColor() {
+    private func getRGBColor() {
         
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         
-        colorScreenView.backgroundColor!.getRed(
+        
+        viewColor.getRed(
             &red,
             green: &green,
             blue: &blue,
@@ -105,6 +116,7 @@ class SettingsViewController: UIViewController {
             blue: CGFloat(blueSlider.value),
             alpha: CGFloat(1)
         )
+
     }
 }
 
