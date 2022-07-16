@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
     var viewColor: UIColor!
     var delegate: SettingsViewControllerDelegate!
     
-//    MARK: viewDidLoad
+//    MARK: View Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +39,16 @@ class SettingsViewController: UIViewController {
         getInitialColorPositions()
     }
     
-//    MARK: sliders change functions
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+//    MARK: IB Actions
     
     @IBAction func sliderChange() {
         viewColorUpdate()
     }
-    
-//   MARK: save button action
     
     @IBAction func saveButtonTouched() {
         viewColor = colorScreenView.backgroundColor
@@ -53,7 +56,7 @@ class SettingsViewController: UIViewController {
         dismiss(animated: true)
     }
     
-//   MARK: delegate initialisation for TextFields
+//   MARK: Private methods
     
     private func delegateTF() {
         redTextField.delegate = self
@@ -61,19 +64,42 @@ class SettingsViewController: UIViewController {
         blueTextField.delegate = self
     }
     
-//   MARK: get Initial Position for Sliders, TextFields, Labels
-
     private func getInitialColorPositions() {
-        redSlider.value = getComponentValue(.red, from: viewColor)
-        greenSlider.value = getComponentValue(.green, from: viewColor)
-        blueSlider.value = getComponentValue(.blue, from: viewColor)
+        let ciColor = CIColor(color: viewColor)
+        
+        redSlider.value = Float(ciColor.red)
+        greenSlider.value = Float(ciColor.green)
+        blueSlider.value = Float(ciColor.blue)
                 
         viewColorUpdate()
     }
     
-//   MARK: Text update on Labels
-    
-    private func labelTextUpdate(on labels: UILabel...) {
+    private func updateText(on textFields: UITextField...) {
+        let ciColor = CIColor(color: viewColor)
+        
+        textFields.forEach { textField in
+            switch textField {
+                
+            case redTextField:
+                textField.text = String(
+                    format: "%.2f",
+                    ciColor.red
+                )
+            case greenTextField:
+                textField.text = String(
+                    format: "%.2f",
+                    ciColor.green
+                )
+            default:
+                textField.text = String(
+                    format: "%.2f",
+                    ciColor.blue
+                )
+            }
+        }
+    }
+        
+    private func updateText(on labels: UILabel...) {
         labels.forEach { label in
             switch label {
                 
@@ -86,31 +112,6 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
-//   MARK: Text update on TextFields
-    
-    private func updateTF(on textFields: UITextField...) {
-        textFields.forEach { textField in
-            switch textField {
-                
-            case redTextField:
-                textField.text = String(
-                    format: "%.2f",
-                    getComponentValue(.red, from: viewColor)
-                )
-            case greenTextField:
-                textField.text = String(
-                    format: "%.2f",
-                    getComponentValue(.green, from: viewColor))
-            default:
-                textField.text = String(
-                    format: "%.2f",
-                    getComponentValue(.blue, from: viewColor))
-            }
-        }
-    }
-    
-//   MARK: ViewColor update
 
     private func viewColorUpdate() {
 
@@ -123,14 +124,15 @@ class SettingsViewController: UIViewController {
         
         colorScreenView.backgroundColor = viewColor
         
-        updateTF(on: redTextField, greenTextField, blueTextField)
-        labelTextUpdate(on: redValueLabel, greenValueLabel, blueValueLabel)
+        updateText(on: redTextField, greenTextField, blueTextField)
+        updateText(on: redValueLabel, greenValueLabel, blueValueLabel)
     }
 }
 
 //   MARK: Extension UITextFieldDelegate
 
 extension SettingsViewController: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard var textFieldValue = Float(textField.text!) else { return }
         
@@ -142,56 +144,37 @@ extension SettingsViewController: UITextFieldDelegate {
         
         switch textField {
         case redTextField:
-            redSlider.value = textFieldValue
+            redSlider.setValue(textFieldValue, animated: true)
         case greenTextField:
-            greenSlider.value = textFieldValue
+            greenSlider.setValue(textFieldValue, animated: true)
         default:
-            blueSlider.value = textFieldValue
+            blueSlider.setValue(textFieldValue, animated: true)
         }
         
         viewColorUpdate()
     }
-}
-
-//   MARK: Extension color decomposition to Red, Green, Blue
-
-extension SettingsViewController {
-    enum ColorComponent {
-        case red
-        case green
-        case blue
-    }
     
-    private func getComponentValue(_ component: ColorComponent, from color: UIColor) -> Float {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolbar
         
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        
-        color.getRed(
-            &red,
-            green: &green,
-            blue: &blue,
-            alpha: &alpha
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(didTapDone)
         )
         
-        switch component {
-        case .red:
-            return Float(red)
-        case .green:
-            return Float(green)
-        case .blue:
-            return Float(blue)
-        }
+        let flexBarButton = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        keyboardToolbar.items = [flexBarButton, doneButton]
     }
-}
-
-
-//    MARK: Extension keyboard hide
-extension SettingsViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+    
+    @objc private func didTapDone() {
         view.endEditing(true)
     }
 }
